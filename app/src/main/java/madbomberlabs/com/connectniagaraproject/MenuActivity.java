@@ -66,17 +66,19 @@ public class MenuActivity extends Activity
         myURL = "http://www.madbomberlabs.com/CSV/androidtest.csv";
 
     // Check if file exists at URL
-        new Thread(){
+        new Thread()
+        {
 
             @Override
             public void run()
             {
                 super.run();
 
-                try {
+                try
+                {
                     URL url = new URL(myURL);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    con.setRequestMethod("GET");
+                    con.setRequestMethod("HEAD");
                     con.connect();
                     Log.i(TAG, "con.getResponseCode() IS : " + con.getResponseCode());
                     if (con.getResponseCode() == HttpURLConnection.HTTP_OK)
