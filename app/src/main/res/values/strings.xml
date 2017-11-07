@@ -1,0 +1,54 @@
+<resources>
+    <!-- GLOBAL -->
+    <string name="app_name">Connect &amp; Protect Niagara</string>
+
+    <!-- TITLES -->
+    <string name="title_menu">Welcome!</string>
+    <string name="title_directory">Directory</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_filter">Filter</string>
+    <string name="title_results">Results</string>
+    <string name="title_sendEmail">Send Email</string>
+
+    <!-- DESCRIPTIONS -->
+    <string name="menu_description">
+        This is the Connect &amp; Protect Niagara mobile directory. It\'s purpose is
+        to solve the issue of residents\' lack of awareness of local agencies, services, and programs
+        that are available to improve the residents\' quality of life. By partnering with agencies
+        and residents within the Niagara region, we can increase awareness while also establishing
+        trust and equality.
+        </string>
+
+    <!-- HINTS -->
+    <string name="hint_message">Your Email Message &#8230;</string>
+
+    <!-- BUTTONS -->
+    <string name="btn_directory">Directory</string>
+    <string name="btn_search">Filter</string>
+    <string name="btn_favorites">Favorites</string>
+    <string name="btn_goMenu">Menu</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_apply">Apply</string>
+
+    <!-- LABELS -->
+    <string name="lbl_contact">Contact</string>
+    <string name="lbl_phone">Phone</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_website">Website</string>
+    <string name="lbl_servicetype">Service Type</string>
+    <string name="lbl_serviceprovided">Services Provided</string>
+    <string name="lbl_address">Address</string>
+
+    <!-- SERVICE TYPES -->
+    <string name="st_title">Service Type</string>
+    <string name="st_community_service">Community Service</string>
+    <string name="st_charity">Charity</string>
+    <string name="st_education">Education</string>
+    <string name="st_finance">Finance</string>
+    <string name="st_advisement">Advisement</string>
+
+    <!-- LOREM IPSUM -->
+    <string name="li_short">Facit assum option duis est nunc. Quarta consequat duis facilisis nulla usus. Ad dolore quarta suscipit quam ii.</string>
+    <string name="title_activity_map">Map</string>
+
+</resources>

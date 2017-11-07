@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+
+    tools:context="madbomberlabs.com.connectniagaraproject.MenuActivity">
+
+    <TextView
+        android:text="@string/title_menu"
+        style="@style/ActivityTitle" />
+
+    <View
+        style="@style/MenuBreak"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="@string/menu_description"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/body"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_directory"
+            android:text="@string/btn_directory"
+            style="@style/BtnMenu"
+            android:layout_marginTop="0sp"
+            android:onClick="goDirectory" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:text="@string/btn_search"
+            style="@style/BtnMenu"
+            android:onClick="goSearch"/>
+
+        <Button
+            android:id="@+id/btn_favorites"
+            android:text="@string/btn_favorites"
+            style="@style/BtnMenu"
+            android:onClick="goFavorites"/>
+
+    </LinearLayout>
+
+</LinearLayout>

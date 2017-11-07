@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+
+    tools:context="madbomberlabs.com.connectniagaraproject.BusinessCardActivity">
+
+    <TextView
+        android:id="@+id/tv_org"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ActivityTitle" />
+
+    <!-- CONTACT -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lbl_contact"
+            android:text="@string/lbl_contact"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BCtext" />
+    </LinearLayout>
+
+    <!-- EMAIL -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_email"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            style="@style/BCtext" />
+    </LinearLayout>
+
+    <!-- PHONE -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_phone"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            style="@style/BCtext" />
+    </LinearLayout>
+
+    <!-- WEBSITE -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_website"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            style="@style/BCtext" />
+    </LinearLayout>
+
+    <!-- ADDRESS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_address"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            style="@style/BCtext" />
+    </LinearLayout>
+
+    <!-- PAGE BREAK -->
+    <View
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="15sp"
+        style="@style/MenuBreak" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- SERVICE TYPE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_servicetype"
+                style="@style/Label" />
+            <TextView
+                android:id="@+id/tv_servicetype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginStart="10sp"
+                style="@style/BCtext" />
+        </LinearLayout>
+
+        <!-- SERVICES PROVIDED -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_serviceprovided"
+            style="@style/Label" />
+        <TextView
+            android:id="@+id/tv_servicesprovided"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/BCtext" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true">
+
+                <!-- CHECKBOX AND CLOSE BTN -->
+                <CheckBox
+                    android:id="@+id/cbFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Favorite"/>
+                <Button
+                    android:id="@+id/btn_close"
+                    android:layout_marginBottom="20sp"
+                    android:text="@string/btn_close"
+                    style="@style/BtnMenu"
+                    android:onClick="goCloseBusinessCard"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

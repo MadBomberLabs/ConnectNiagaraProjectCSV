@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+
+    tools:context="madbomberlabs.com.connectniagaraproject.FavoritesActivity" >
+
+    <TextView
+        android:text="@string/title_favorites"
+        style="@style/ActivityTitle" />
+
+    <View
+        style="@style/MenuBreak" />
+
+    <ListView
+        android:id="@+id/lvFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="422dp">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20sp"
+            android:text="@string/btn_close"
+            style="@style/BtnMenu"
+            android:onClick="closeFavorites"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

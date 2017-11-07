@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+
+    tools:context="madbomberlabs.com.connectniagaraproject.FilterResultsActivity">
+
+    <TextView
+        android:text="@string/title_results"
+        style="@style/ActivityTitle" />
+
+    <View
+        style="@style/MenuBreak" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_goMenu"
+            android:text="@string/btn_goMenu"
+            style="@style/NavMenu"
+            android:onClick="goMenu"/>
+
+        <Button
+            android:id="@+id/btn_goSearch"
+            android:text="@string/btn_search"
+            style="@style/NavMenu"
+            android:onClick="goFilter" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+</LinearLayout>

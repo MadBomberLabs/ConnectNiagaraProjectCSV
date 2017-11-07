@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+
+    tools:context="madbomberlabs.com.connectniagaraproject.FilterActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_filter"
+        style="@style/ActivityTitle"/>
+
+    <!-- SERVICE TYPE RG -->
+    <RadioGroup
+        android:id="@+id/rgServiceType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/st_title"
+            style="@style/Label"/>
+        <RadioButton
+            android:id="@+id/rbCommunityService"
+            android:text="@string/st_community_service"
+            style="@style/rb" />
+        <RadioButton
+            android:id="@+id/rbAdvisement"
+            android:text="@string/st_advisement"
+            style="@style/rb" />
+        <RadioButton
+            android:id="@+id/rbCharity"
+            android:text="@string/st_charity"
+            style="@style/rb" />
+        <RadioButton
+            android:id="@+id/rbEducation"
+            android:text="@string/st_education"
+            style="@style/rb" />
+        <RadioButton
+            android:id="@+id/rbFinance"
+            android:text="@string/st_finance"
+            style="@style/rb" />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_marginBottom="20sp" >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_goMenu"
+                style="@style/NavMenu"
+                android:onClick="goMenu" />
+            <Button
+                android:id="@+id/btn_close"
+                android:text="@string/btn_apply"
+                style="@style/NavMenu"
+                android:onClick="goApplyFilter" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
