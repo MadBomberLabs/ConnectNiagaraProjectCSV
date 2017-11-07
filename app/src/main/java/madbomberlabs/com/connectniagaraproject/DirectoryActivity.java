@@ -3,28 +3,33 @@ package madbomberlabs.com.connectniagaraproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DirectoryActivity extends Activity
 {
 
     ListView lvContacts;
-    String itemValue, passedID;
+    List<Org> arrlstOrg;
 
-    // DB
-    DBAdapter niagaraDB;
-    Cursor c, c2;
-
-    // Array and ArrayList
-    List<String> arrlstOrg = new ArrayList<>();
-    String[] arrOrg;
+    // FOR NETWORK REQUEST
+    private static final int CODE_GET_REQUEST = 1024;
+    private static final int CODE_POST_REQUEST = 1025;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,9 +38,9 @@ public class DirectoryActivity extends Activity
         setContentView(R.layout.activity_directory);
 
         lvContacts = (ListView) findViewById(R.id.lvContacts);
-        niagaraDB = new DBAdapter(this);
+        arrlstOrg = new ArrayList<>();
 
-       showList();
+       getAllOrgs();
     }
 
     @Override
@@ -44,91 +49,115 @@ public class DirectoryActivity extends Activity
         super.onResume();
 
         lvContacts.setAdapter(null);
-        showList();
+        getAllOrgs();
     }
 
-// Show the list in the ListView
-    public void showList()
-    {
-        // Clear array so items aren't added to list twice
-        arrlstOrg.clear();
-
-        niagaraDB.open();
-
-        //Declare Cursor in memory
-        c = niagaraDB.getAllRecords();
-
-
-        /* Get Content, moveToFirst moves cursor to first record,
-           if statement is safety for checking that record exists */
-        if (c.moveToFirst())
-        {
-            do
-            {
-                // Add cursor to OrgLong ArrayList
-                arrlstOrg.add(c.getString(1));
-            }
-            while (c.moveToNext());
-
-            niagaraDB.close();
-
-            // Creates string array of size arrlstOrg
-            arrOrg = new String[arrlstOrg.size()];
-
-            // Copy the items from arrlstOrg to Array arrOrg
-            // for use in ListView
-            arrlstOrg.toArray(arrOrg);
-
-            // Connect the Array arrOrg to ListView
-            lvContacts.setAdapter(new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1, arrOrg));
-
-            // onClickListener for ListView items
-            lvContacts.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    itemValue = lvContacts.getItemAtPosition(position).toString();
-
-                    // Get KEY_ID from record by name (itemValue)
-                    niagaraDB.open();
-
-                    // Define second cursor used by onclick item
-                    c2 = niagaraDB.getIdByName(itemValue);
-
-                    if (c2.moveToFirst())
-                    {
-                        passedID = c2.getString(0);
-                    }
-
-                    niagaraDB.close();
-
-                    // Passes KEY_ID to and opens BusinessCardActivity.class
-                    goBusinessCard(passedID);
-                }
-            });
-        }
-    }
-
-// Set Methods for Buttons
+// SET METHODS FOR BUTTONS
     public void goMenu(View v)
     {
         startActivity(new Intent(this, MenuActivity.class));
     }
-
     public void goFilter(View v)
     {
         startActivity(new Intent(this, FilterActivity.class));
     }
 
-// Method for opening BusinessCardActivity and passes ordID
-    public void goBusinessCard(String orgID)
+// RETRIEVE ALL ORGS
+    private void getAllOrgs()
     {
-        Bundle extras = new Bundle();
-        extras.putString("pass_id", orgID);
-        Intent BusinessCard = new Intent(this, BusinessCardActivity.class);
-        BusinessCard.putExtras(extras);
-        startActivity(BusinessCard);
+        PerformNetworkRequest request = new PerformNetworkRequest(APIHandler.URL_READ_ORGS, null, CODE_GET_REQUEST);
+        request.execute();
+    }
+
+// REFRESH ORG LIST
+    private void refreshOrgList(JSONArray orgs) throws JSONException
+    {
+        // CLEAR PREVIOUS ORGS
+        arrlstOrg.clear();
+
+        // CYCLE ALL ITEMS IN JSON ARRAY RETRIEVED FROM NETWORK REQUEST
+        for (int i=0; i < orgs.length(); i++)
+        {
+            // GETTING EACH ORG OBJECT
+            JSONObject obj = orgs.getJSONObject(i);
+
+            // ADDING THE ORG TO THE LIST
+            arrlstOrg.add(new Org(
+                    obj.getString("id"),
+                    obj.getString("org"),
+                    obj.getString("firstName"),
+                    obj.getString("lastName"),
+                    obj.getString("email"),
+                    obj.getString("phone"),
+                    obj.getString("website"),
+                    obj.getString("serviceType"),
+                    obj.getString("service"),
+                    obj.getString("streetAddress"),
+                    obj.getString("city"),
+                    obj.getString("state"),
+                    obj.getString("zip"),
+                    obj.getString("favorite")
+            ));
+        }
+    }
+
+// CLASS FOR PERFORMING NETWORK REQUEST EXTENDING AN AsyncTask
+    private class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+
+        // URL WHERE REQUEST IS SENT
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        //constructor to initialize values
+        PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        //when the task started displaying a progressbar
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+
+        //this method will give the response from the request
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            //progressBar.setVisibility(GONE);
+            try {
+                JSONObject object = new JSONObject(s);
+                if (!object.getBoolean("error")) {
+                    Toast.makeText(getApplicationContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                    //refreshing the orgList after every operation so we get an updated list
+                    refreshOrgList(object.getJSONArray("orgs"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //the network operation will be performed in background
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+
+
+            if (requestCode == CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
+
+            return null;
+        }
     }
 }
